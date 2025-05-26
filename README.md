@@ -1,8 +1,12 @@
-criar uma art ascii (moldura + simbolo asaas ou titulo)
+# Mini Asaas
 
-# mini-asaas
+![Asaas, sua Conta Digital](tagline.png)
 
-linguagens icons
-descricao
-listas
-etc....
+Um projeto para simular o mini mundo do Asaas, tendo por fim reproduzir um sistema de gerenciamento de cobranças.
+
+Tecnologias
+- HTML
+- CSS
+- Javascript
+- MySQL
+- Grails
