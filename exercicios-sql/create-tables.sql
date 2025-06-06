@@ -1,32 +1,36 @@
-CREATE DATABASE mini_asaas_db;
+CREATE DATABASE mini_asaas;
 
-CREATE TABLE pagador(
-	pagador_id INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE payer(
+	payer_id INT PRIMARY KEY AUTO_INCREMENT,
     cpf_cnpj VARCHAR(20) UNIQUE NOT NULL,
-    nome VARCHAR(255) NOT NULL,
-    data_nasc DATE,
-    endereco VARCHAR(255),
-    telefone VARCHAR(20)
+    name VARCHAR(255) NOT NULL,
+    birth_date DATE,
+    address VARCHAR(255),
+    phone VARCHAR(20)
 );
 
-CREATE TABLE cobranca(
-	cobranca_id INT PRIMARY KEY AUTO_INCREMENT,
-    valor DECIMAL(10,2) NOT NULL,
-    data_emissao DATE NOT NULL,
-    data_vencimento DATE NOT NULL,
-    descricao TEXT,    
-    pagador_id INT NOT NULL,
-    cobrador_id INT NOT NULL,    
-    
-    FOREIGN KEY(pagador_id) REFERENCES pagador(pagador_id),
-    FOREIGN KEY(cobrador_id) REFERENCES cobrador(cobrador_id)
-);
-
-CREATE TABLE cobrador(
-	cobrador_id INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE collector(
+	collector_id INT PRIMARY KEY AUTO_INCREMENT,
 	cpf_cnpj VARCHAR(20) UNIQUE NOT NULL,
-    nome_razao_social VARCHAR(255),
-    nome_fantasia VARCHAR(255),
-    endereco VARCHAR(255),
-    telefone VARCHAR(20)
+    name VARCHAR(255) NOT NULL,
+    business_name VARCHAR(255), 
+    address VARCHAR(255),
+    phone VARCHAR(20)
+);
+
+CREATE TABLE billing(
+	billing_id INT PRIMARY KEY AUTO_INCREMENT,
+    amount DECIMAL(10,2) NOT NULL,
+    description TEXT,
+    issue_date DATE NOT NULL,
+    due_date DATE NOT NULL,
+
+    status ENUM('PENDING', 'PAID', 'OVERDUE', 'CANCELED') NOT NULL DEFAULT 'PENDING',
+    payment_date DATE,
+
+    payer_id INT NOT NULL,
+    collector_id INT NOT NULL,    
+    
+    FOREIGN KEY(payer_id) REFERENCES payer(payer_id),
+    FOREIGN KEY(collector_id) REFERENCES collector(collector_id)
 );
